@@ -29,6 +29,19 @@ MongoClient.connect(mdbURL, {native_parser:true}, (err, database) => {
     });
 });
 
+// LOCK a collection - Unauthorized
+app.lock(BASE_API_PATH, function (request, response) {
+    console.error('WARNING: Error Unauthorized');
+    response.sendStatus(401); // Unauthorized
+});
+
+// UNLOCK a collection - Bad Request
+app.unlock(BASE_API_PATH, function (request, response) {
+    console.error('WARNING: Error Bad Request');
+    response.sendStatus(400); // Bad Request
+});
+
+
 // GET a collection
 app.get(BASE_API_PATH, function (request, response) {
     console.log("INFO: New GET request to /contracts");
