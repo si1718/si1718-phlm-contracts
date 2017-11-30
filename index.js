@@ -6,12 +6,16 @@ var bodyParser = require("body-parser");
 var helmet = require("helmet");
 var MongoClient = require("mongodb").MongoClient;
 var path = require('path');
+var cors = require("cors");
+var randToken = require("rand-token");
 
 var port = (process.env.PORT || 10000);
-var mdbURL = "mongodb://admin:1234@ds251435.mlab.com:51435/si1718-phlm-contracts";
 var BASE_API_PATH = "/api/v1";
+var mdbURL = "mongodb://admin:1234@ds251435.mlab.com:51435/si1718-phlm-contracts";
 
 var app = express();
+
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -32,19 +36,18 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, database) => {
     });
 });
 
-/*
-// LOCK a collection - Unauthorized
-app.lock(BASE_API_PATH + "/contracts", function (request, response) {
-    console.error('WARNING: Error Unauthorized');
-    response.sendStatus(401); // Unauthorized
-});
+// GET data
+app.get(BASE_API_PATH + "/contracts/data", function(request, response) {
+    var data = [];
+    var generator = randToken.generator({ chars: "numeric" });
 
-// UNLOCK a collection - Bad Request
-app.unlock(BASE_API_PATH + "/contracts", function (request, response) {
-    console.error('WARNING: Error Bad Request');
-    response.sendStatus(400); // Bad Request
+    for (var i = 0; i < 100; i++) {
+        var number = generator.generate(1);
+        data.push(new Number(number));
+
+    }
+    response.send(data);
 });
-*/
 
 // GET a collection
 app.get(BASE_API_PATH + "/contracts", function(request, response) {

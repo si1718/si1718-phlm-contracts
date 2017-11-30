@@ -1,15 +1,17 @@
 angular.module("ContractsManagerApp", ["ngRoute"])
-    .config(function ($routeProvider){
-        
+    .config(function($routeProvider) {
+
         $routeProvider
-            .when("/",{
+            .when("/", {
                 templateUrl: "list.html",
-                controller : "ListCtrl"
-            }).when("/contracts/:idContract",{
+                controller: "ListCtrl"
+            }).when("/contracts/:idContract", {
                 templateUrl: "edit.html",
-                controller : "EditCtrl"
+                controller: "EditCtrl"
+            }).when("/graph", {
+                templateUrl: "graph.html",
+                controller: "GraphCtrl"
             });
-        
-        console.log("App Initialized");            
-        
+        console.log("App Initialized");
+
     });

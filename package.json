@@ -5,9 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
+    "express-jwt": "^5.3.0",
     "helmet": "^3.9.0",
-    "mongodb": "^2.2.33"
+    "jwt-simple": "^0.5.1",
+    "mongodb": "^2.2.33",
+    "rand-token": "^0.4.0"
   },
   "devDependencies": {},
   "scripts": {
