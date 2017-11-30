@@ -1,0 +1,31 @@
+<h2>Edit contract {{reference}}</h2>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th> Reference </th>
+            <th> Name </th>
+            <th> Leader(s)</th>
+            <th> Project Type </th>
+            <th> Start Date </th>
+            <th> Finish Date </th>
+            <th> Funders </th>
+            <th> Researchers </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{updatedContract.reference}}</td>
+            <td><input ng-model="updatedContract.nmContract" /></td>
+            <td><input ng-model="updatedContract.leader" /></td>
+            <td><input ng-model="updatedContract.projectType" /></td>
+            <td><input ng-model="updatedContract.startDate" /></td>
+            <td><input ng-model="updatedContract.finishDate" /></td>
+            <td><input ng-model="updatedContract.funders" /></td>
+            <td><input ng-model="updatedContract.researchers" /></td>
+            <td>
+                <button class="btn btn-primary" ng-click="updateContract()">Update</button>
+                <button class="btn btn-primary" ng-click="cancelUpdate()">Cancel</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

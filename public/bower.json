@@ -1,0 +1,22 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/si1718/si1718-phlm-contracts",
+  "authors": [
+    "Paulo Henrique Leal Martins <martins.paulohenriqueleal@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.6",
+    "bootstrap": "^3.3.7",
+    "angular-route": "^1.6.6"
+  }
+}
