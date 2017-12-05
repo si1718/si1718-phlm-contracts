@@ -2,43 +2,45 @@
 <table class="table table-condensed">
     <thead>
         <tr>
+            <th> </th>
             <th> Reference </th>
             <th> Name </th>
-            <th> Leader(s)</th>
-            <th> Project Type </th>
+            <th> Leader</th>
             <th> Start Date </th>
             <th> Finish Date </th>
             <th> Funders </th>
             <th> Researchers </th>
+            <th> Keywords </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><input ng-model="contract.reference" /></td>
-            <td><input ng-model="contract.nmContract" /></td>
-            <td><input ng-model="contract.leader" /></td>
-            <td><input ng-model="contract.projectType" /></td>
-            <td><input ng-model="contract.startDate" /></td>
-            <td><input ng-model="contract.finishDate" /></td>
-            <td><input ng-model="contract.funders" /></td>
-            <td><input ng-model="contract.researchers" /></td>
-            <td>
-                <button class="btn btn-primary" ng-click="addContract()">Add</button>
-                <button class="btn btn-primary" ng-click="search()">Search</button>
-            </td>
+            <td> </td>
+            <td><input ng-model="contract.reference"    id="contract.reference" /></td>
+            <td><input ng-model="contract.nmContract"   id="contract.nmContract" /></td>
+            <td><input ng-model="contract.leader"       id="contract.leader" /></td>
+            <td><input ng-model="contract.startDate"    id="contract.startDate"/></td>
+            <td><input ng-model="contract.finishDate"   id="contract.finishDate"/></td>
+            <td><input ng-model="contract.funders"      id="contract.funders"/></td>
+            <td><input ng-model="contract.researchers"  id="contract.researchers"/></td>
+            <td><input ng-model="contract.keyWords"     id="contract.keyWords"/></td>
+        </tr>
+        <tr>
+            <button class="btn btn-primary" ng-click="addContract()">Add</button>
+            <button class="btn btn-primary" ng-click="search()">Search</button>
         </tr>
         <tr ng-repeat="contract in contracts">
+            <td>
+                <button class="btn btn-danger" ng-click="deleteContract(contract.idContract)">Delete</button>
+            </td>
             <td><a href="#!/contracts/{{contract.idContract}}">{{contract.reference}}</a></td>
             <td>{{contract.nmContract}}</td>
             <td>{{contract.leader}}</td>
-            <td>{{contract.projectType}}</td>
             <td>{{contract.startDate}}</td>
             <td>{{contract.finishDate}}</td>
             <td>{{contract.funders}}</td>
             <td>{{contract.researchers}}</td>
-            <td>
-                <button class="btn btn-danger" ng-click="deleteContract(contract.idContract)">Delete</button>
-            </td>
+            <td>{{contract.keyWords}}</td>
         </tr>
     </tbody>
 </table>

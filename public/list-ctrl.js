@@ -1,6 +1,7 @@
 angular.module("ContractsManagerApp")
     .controller("ListCtrl", ["$scope", "$http", function($scope, $http) {
 
+
         function mesageError(e) {
             if (e == "Bad Request")
                 alert("Enter all the data required for the request. Bad Request, error 400.");
@@ -29,17 +30,27 @@ angular.module("ContractsManagerApp")
                 idContract: "",
                 nmContract: "",
                 leader: "",
-                projectType: "",
                 reference: "",
                 startDate: "",
                 finishDate: "",
                 funders: "",
-                researchers: ""
+                researchers: "",
+                keyWords: ""
             }
 
         }
 
         $scope.addContract = function() {
+
+            if (document.getElementById("contract.reference").value == "" ||
+                document.getElementById("contract.nmContract").value == "" ||
+                document.getElementById("contract.leader").value == "" ||
+                document.getElementById("contract.startDate").value == "" ||
+                document.getElementById("contract.finishDate").value == "" ||
+                document.getElementById("contract.funders").value == "" ||
+                document.getElementById("contract.researchers").value == "" ||
+                document.getElementById("contract.keyWords").value == "")
+                alert("All data is required");
 
             $http
                 .post("/api/v1/contracts/", $scope.contract)
@@ -76,9 +87,6 @@ angular.module("ContractsManagerApp")
             if ($scope.contract.leader) {
                 searchURL = searchURL + "leader=" + $scope.contract.leader + "&";
             }
-            if ($scope.contract.projectType) {
-                searchURL = searchURL + "projectType=" + $scope.contract.projectType + "&";
-            }
             if ($scope.contract.startDate) {
                 searchURL = searchURL + "startDate=" + $scope.contract.startDate + "&";
             }
@@ -91,6 +99,9 @@ angular.module("ContractsManagerApp")
             if ($scope.contract.researchers) {
                 searchURL = searchURL + "researchers=" + $scope.contract.researchers + "&";
             }
+            if ($scope.contract.keyWords) {
+                searchURL = searchURL + "keyWords=" + $scope.contract.keyWords + "&";
+            }            
             if (searchURL.length > 0) {
                 searchURL = "?" + searchURL;
                 searchURL = searchURL.substring(0, searchURL.length - 1);

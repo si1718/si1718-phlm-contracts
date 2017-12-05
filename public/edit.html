@@ -4,28 +4,100 @@
         <tr>
             <th> Reference </th>
             <th> Name </th>
-            <th> Leader(s)</th>
-            <th> Project Type </th>
+            <th> Leader</th>
+            <th> <div style="display: none;" id="lblLeaderGroup"> Leader group </div> </th>
             <th> Start Date </th>
             <th> Finish Date </th>
             <th> Funders </th>
             <th> Researchers </th>
+            <th> Keywords </th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>{{updatedContract.reference}}</td>
             <td><input ng-model="updatedContract.nmContract" /></td>
-            <td><input ng-model="updatedContract.leader" /></td>
-            <td><input ng-model="updatedContract.projectType" /></td>
-            <td><input ng-model="updatedContract.startDate" /></td>
-            <td><input ng-model="updatedContract.finishDate" /></td>
-            <td><input ng-model="updatedContract.funders" /></td>
-            <td><input ng-model="updatedContract.researchers" /></td>
-            <td>
-                <button class="btn btn-primary" ng-click="updateContract()">Update</button>
-                <button class="btn btn-primary" ng-click="cancelUpdate()">Cancel</button>
-            </td>
+            <td><input ng-model="updatedContract.leader" id="inpLeader" enable /> <br>
+                <button class="btn btn-primary" ng-click="validateLeader()" id="btnValidateLeader">Validate</button>
+                <button class="btn btn-primary" ng-click="editLeader()" id="btnEditLeader">Edit</button>
+                <td> 
+                    <div style="display: none;" id="infLeaderGroup"> 
+                        <input ng-model="leaderGroup" id="leaderGroup" /> 
+                    </div>
+                </td>
+                <td> <input ng-model="updatedContract.startDate" /></td>
+                <td> <input ng-model="updatedContract.finishDate" /></td>
+                <td> <input ng-model="updatedContract.funders" /></td>
+                <td>
+                    <div style="display: none;" id="researcher1">
+                        <input type='text' id='inpResearcher1' value=''>
+                        <button id='btnValidateResearcher1' class='btn btn-primary' ng-click='validateResearcher(1)'>Validate</button>
+                        <button id='btnEditResearcher1' class='btn btn-primary' ng-click='editResearcher(1)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher2">
+                        <input type='text' id='inpResearcher2' value=''>
+                        <button id='btnValidateResearcher2' class='btn btn-primary' ng-click='validateResearcher(2)'>Validate</button>
+                        <button id='btnEditResearcher2' class='btn btn-primary' ng-click='editResearcher(2)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher3">
+                        <input type='text' id='inpResearcher3' value=''>
+                        <button id='btnValidateResearcher3' class='btn btn-primary' ng-click='validateResearcher(3)'>Validate</button>
+                        <button id='btnEditResearcher3' class='btn btn-primary' ng-click='editResearcher(3)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher4">
+                        <input type='text' id='inpResearcher4' value=''>
+                        <button id='btnValidateResearcher4' class='btn btn-primary' ng-click='validateResearcher(4)'>Validate</button>
+                        <button id='btnEditResearcher4' class='btn btn-primary' ng-click='editResearcher(4)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher5">
+                        <input type='text' id='inpResearcher5' value=''>
+                        <button id='btnValidateResearcher5' class='btn btn-primary' ng-click='validateResearcher(5)'>Validate</button>
+                        <button id='btnEditResearcher5' class='btn btn-primary' ng-click='editResearcher(5)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher6">
+                        <input type='text' id='inpResearcher6' value=''>
+                        <button id='btnValidateResearcher6' class='btn btn-primary' ng-click='validateResearcher(6)'>Validate</button>
+                        <button id='btnEditResearcher6' class='btn btn-primary' ng-click='editResearcher(6)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher7">
+                        <input type='text' id='inpResearcher7' value=''>
+                        <button id='btnValidateResearcher7' class='btn btn-primary' ng-click='validateResearcher(7)'>Validate</button>
+                        <button id='btnEditResearcher7' class='btn btn-primary' ng-click='editResearcher(7)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher8">
+                        <input type='text' id='inpResearcher8' value=''>
+                        <button id='btnValidateResearcher8' class='btn btn-primary' ng-click='validateResearcher(8)'>Validate</button>
+                        <button id='btnEditResearcher8' class='btn btn-primary' ng-click='editResearcher(8)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher9">
+                        <input type='text' id='inpResearcher9' value=''>
+                        <button id='btnValidateResearcher9' class='btn btn-primary' ng-click='validateResearcher(9)'>Validate</button>
+                        <button id='btnEditResearcher9' class='btn btn-primary' ng-click='editResearcher(9)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher10">
+                        <input type='text' id='inpResearcher10' value=''>
+                        <button id='btnValidateResearcher10' class='btn btn-primary' ng-click='validateResearcher(10)'>Validate</button>
+                        <button id='btnEditResearcher10' class='btn btn-primary' ng-click='editResearcher(10)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher11">
+                        <input type='text' id='inpResearcher11' value=''>
+                        <button id='btnValidateResearcher11' class='btn btn-primary' ng-click='validateResearcher(11)'>Validate</button>
+                        <button id='btnEditResearcher11' class='btn btn-primary' ng-click='editResearcher(11)'>Edit</button>
+                    </div>
+                    <div style="display: none;" id="researcher12">
+                        <input type='text' id='inpResearcher12' value=''>
+                        <button id='btnValidateResearcher12' class='btn btn-primary' ng-click='validateResearcher(12)'>Validate</button>
+                        <button id='btnEditResearcher12' class='btn btn-primary' ng-click='editResearcher(12)'>Edit</button>
+                    </div>
+                </td>
+                <td> <input ng-model="updatedContract.keyWords" id="updatedContract.keyWords" />
+                    <button id='btnEditKeyWords' class='btn btn-primary' ng-click='editKeyWords()'>Edit</button>
+                    <button id='btnSaveKeyWords' class='btn btn-primary' ng-click='saveKeyWords()'>Save</button>
+                </td>
+        </tr>
+        <tr>
+            <button class="btn btn-primary" ng-click="updateContract()">Update</button>
+            <button class="btn btn-primary" ng-click="cancelUpdate()">Cancel</button>
         </tr>
     </tbody>
 </table>
