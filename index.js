@@ -64,9 +64,6 @@ app.get(BASE_API_PATH + "/contracts", function(request, response) {
     if (request.query.leader)
         query["leader"] = request.query.leader;
 
-    if (request.query.projectType)
-        query["projectType"] = request.query.projectType;
-
     if (request.query.startDate)
         query["startDate"] = request.query.startDate;
 
@@ -78,6 +75,9 @@ app.get(BASE_API_PATH + "/contracts", function(request, response) {
 
     if (request.query.researchers)
         query["researchers"] = request.query.researchers;
+        
+    if (request.query.keyWords)
+        query["keyWords"] = request.query.keyWords;
 
 
 
@@ -133,8 +133,8 @@ app.post(BASE_API_PATH + "/contracts", function(request, response) {
     }
     else {
         console.log("INFO: New POST request to /contracts with body: " + JSON.stringify(newcontract, 2, null));
-        if (!newcontract.nmContract || !newcontract.leader ||
-            !newcontract.projectType | !newcontract.reference || !newcontract.startDate || !newcontract.finishDate ||
+        if (!newcontract.nmContract || !newcontract.leader || !newcontract.reference ||
+            !newcontract.startDate || !newcontract.finishDate ||
             !newcontract.funders) {
             console.log("WARNING: The contract " + JSON.stringify(newcontract, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
@@ -191,8 +191,8 @@ app.put(BASE_API_PATH + "/contracts/:idContract", function(request, response) {
     else {
         console.log("INFO: New PUT request to /contracts/" + idContract + " with data " + JSON.stringify(updatedcontract, 2, null));
         if (!updatedcontract.nmContract || !updatedcontract.leader ||
-            !updatedcontract.projectType || !updatedcontract.startDate ||
-            !updatedcontract.finishDate || !updatedcontract.funders) {
+            !updatedcontract.startDate || !updatedcontract.finishDate ||
+            !updatedcontract.funders) {
             console.log("WARNING: The contract " + JSON.stringify(updatedcontract, 2, null) + " is not well-formed, sending 422...");
             response.sendStatus(422); // unprocessable entity
         }

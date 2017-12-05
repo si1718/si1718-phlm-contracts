@@ -53,7 +53,7 @@ angular.module("ContractsManagerApp")
                         $scope.updatedContract.urlResearchers[i] = "";
 
                 }
-
+            
                 delete $scope.updatedContract._id;
 
                 $http
