@@ -49,8 +49,10 @@ angular.module("ContractsManagerApp")
                 document.getElementById("contract.finishDate").value == "" ||
                 document.getElementById("contract.funders").value == "" ||
                 document.getElementById("contract.researchers").value == "" ||
-                document.getElementById("contract.keyWords").value == "")
+                document.getElementById("contract.keyWords").value == "") {
                 alert("All data is required");
+            }
+
 
             $http
                 .post("/api/v1/contracts/", $scope.contract)
@@ -101,7 +103,7 @@ angular.module("ContractsManagerApp")
             }
             if ($scope.contract.keyWords) {
                 searchURL = searchURL + "keyWords=" + $scope.contract.keyWords + "&";
-            }            
+            }
             if (searchURL.length > 0) {
                 searchURL = "?" + searchURL;
                 searchURL = searchURL.substring(0, searchURL.length - 1);
