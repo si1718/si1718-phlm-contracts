@@ -1,6 +1,6 @@
 angular.module("ContractsManagerApp")
-    .controller("EditCtrl", ["$scope", "$http", "$routeParams", "$location",
-        function($scope, $http, $routeParams, $location) {
+    .controller("EditCtrl", ["$scope", "$http", "$routeParams", "$rootScope", "$location", "$uibModal",
+        function($scope, $http, $routeParams, $rootScope, $location, $modal) {
             $scope.idContract = $routeParams.idContract;
             console.log("EditCtrl initialized for contract " + $scope.idContract);
             $http
@@ -12,6 +12,9 @@ angular.module("ContractsManagerApp")
                             document.getElementById("inpLeader").disabled = true;
                             document.getElementById("btnValidateLeader").disabled = true;
                             document.getElementById("btnEditLeader").disabled = false;
+                            document.getElementById("lblLeaderGroup").style.display = 'block';
+                            document.getElementById("infLeaderGroup").style.display = 'block';
+                            document.getElementById("leaderGroup").value = $scope.updatedContract.groupLeader;
                         }
                         else {
                             document.getElementById("inpLeader").disabled = false;
@@ -31,10 +34,10 @@ angular.module("ContractsManagerApp")
                                 document.getElementById("btnValidateResearcher" + (i + 1)).disabled = true;
                                 document.getElementById("inpResearcher" + (i + 1)).disabled = true;
                             }
-                            document.getElementById("updatedContract.keyWords").disabled = true;
-                            document.getElementById("btnEditKeyWords").disabled = false;
-                            document.getElementById("btnSaveKeyWords").disabled = true;
                         }
+                        document.getElementById("updatedContract.keyWords").disabled = true;
+                        document.getElementById("btnEditKeyWords").disabled = false;
+                        document.getElementById("btnSaveKeyWords").disabled = true;
                         document.getElementById("leaderGroup").disabled = true;
                     },
                     function(error) {
@@ -53,7 +56,7 @@ angular.module("ContractsManagerApp")
                         $scope.updatedContract.urlResearchers[i] = "";
 
                 }
-            
+
                 delete $scope.updatedContract._id;
 
                 $http
@@ -73,6 +76,8 @@ angular.module("ContractsManagerApp")
                 $scope.updatedContract.urlLeader = "";
                 document.getElementById("lblLeaderGroup").style.display = 'none';
                 document.getElementById("infLeaderGroup").style.display = 'none';
+                $scope.updatedContract.groupLeader = "";
+                $scope.updatedContract.urlGroupLeader = "";
 
             }
             $scope.editResearcher = function(id) {
@@ -102,8 +107,8 @@ angular.module("ContractsManagerApp")
                     .get(url)
                     .then(function(response) {
                         if (response.data.length > 0) {
-                            $scope.updatedContract.groupLeader = response.data[0].idGroup;
-                            $scope.updatedContract.dptLeader = "https://si1718-rgg-groups.herokuapp.com/api/v1/groups/" + response.data["0"].idResearcher;
+                            $scope.updatedContract.groupLeader = response.data[0].name;
+                            $scope.updatedContract.urlGroupLeader = "https://si1718-rgg-groups.herokuapp.com/#!/group/" + response.data["0"].idGroup;
                         }
                         else
                             alert("There is no group linked to the researcher");
@@ -122,13 +127,13 @@ angular.module("ContractsManagerApp")
                                 document.getElementById("btnValidateLeader").disabled = true;
                                 document.getElementById("btnEditLeader").disabled = false;
                                 console.log("Leader validated");
-                                //document.getElementById("lblLeaderGroup").style.display = 'block';
-                                //document.getElementById("infLeaderGroup").style.display = 'block';
+                                document.getElementById("lblLeaderGroup").style.display = 'block';
+                                document.getElementById("infLeaderGroup").style.display = 'block';
                                 $scope.updatedContract.urlResearchers = response.data["0"].idGroup;
                                 // Get to find leader group
-                                url = "https://si1718-rgg-groups.herokuapp.com/api/v1/groups?search=" + encodeURIComponent(response.data["0"].idGroup);
-                                document.getElementById("infLeaderGroup").value = response.data["0"].idGroup;
-                                // findGroupLeader(url);
+                                url = "https://si1718-rgg-groups.herokuapp.com/api/v1/groups?name=" + encodeURIComponent(response.data["0"].idGroup);
+                                document.getElementById("leaderGroup").value = response.data["0"].idGroup;
+                                findGroupLeader(url);
                             }
                             else
                                 alert("Leader not found");

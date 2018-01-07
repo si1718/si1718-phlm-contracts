@@ -8,7 +8,8 @@ angular.module("ContractsManagerApp")
                     var startsDate = new Array();
 
                     for (var i = 0; i < $scope.data.length; i++) {
-                        if ($scope.data[i].startDate.length == 10)
+                        var year = $scope.data[i].startDate.substring($scope.data[i].startDate.length - 4);
+                        if (!isNaN(year))
                             startsDate.push(parseInt($scope.data[i].startDate.substr($scope.data[i].startDate.length - 4)));
                     }
 
@@ -16,13 +17,9 @@ angular.module("ContractsManagerApp")
                     var minStartDay = Math.min.apply(Math, startsDate);
                     var countYear = Array.apply(null, Array(maxStartDay - minStartDay + 1)).map(Number.prototype.valueOf, 0);
 
-                    for (var i = 0; i < $scope.data.length; i++) {
-                        if ($scope.data[i].startDate.length == 10) {
-                            var date = parseInt($scope.data[i].startDate.substr($scope.data[i].startDate.length - 4));
-                            countYear[date - minStartDay] = countYear[date - minStartDay] + 1;
-                        }
-                    }
-
+                    for (var i = 0; i < startsDate.length; i++)
+                        countYear[startsDate[i] - minStartDay] = countYear[startsDate[i] - minStartDay] + 1;
+                        
                     Highcharts.chart('container', {
 
                         title: {
@@ -45,7 +42,7 @@ angular.module("ContractsManagerApp")
                                 label: {
                                     connectorAllowed: false
                                 },
-                                pointStart: 2010
+                                pointStart: minStartDay
                             }
                         },
 
@@ -84,16 +81,15 @@ angular.module("ContractsManagerApp")
         }
         $scope.showContractGroups = function() {
             var url = "https://si1718-rgg-groups.herokuapp.com/api/v1/groups/" + document.getElementById('cmbGroups').value;
-            alert(url);
             $http
                 .get(url)
                 .then(function(response) {
-                    if (response.data[0] > 0) {
-                        var researcherGroup = JSON.stringify(response.data.leader, 2, null);
-                        alert(researcherGroup);
-                    }
-                    else {
-                        alert("Error!")
+                    if (response.data.length > 0) {
+                        var researchersGroup = [];
+                        researchersGroup.push(JSON.stringify(response.data[0].leader, 2, null));
+                        for (var i = 0; i < response.data[0].components.length; i++)
+                            researchersGroup.push(JSON.stringify(response.data[0].components[i], 2, null));
+                        alert(researchersGroup.toString());
                     }
                 });
         }

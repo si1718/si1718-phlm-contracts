@@ -1,4 +1,4 @@
-/*var app = angular.module("ContractsManagerApp", ["ngRoute", "ngAnimate", "ui.bootstrap"])
+var app = angular.module("ContractsManagerApp", ["ngRoute", "ngAnimate", "ui.bootstrap"])
     .config(function($routeProvider) { // esto es lo que se va a cargar al lanzar la aplicación
         $routeProvider
             .when("/", {
@@ -14,8 +14,7 @@
         console.log("App Initialized");
 
     });
-*/
-var app = angular.module("ContractsManagerApp", ["ngRoute"])
+/*var app = angular.module("ContractsManagerApp", ["ngRoute"])
     .config(function($routeProvider) {
 
         $routeProvider
@@ -32,3 +31,4 @@ var app = angular.module("ContractsManagerApp", ["ngRoute"])
         console.log("App Initialized");
 
     });
+    */

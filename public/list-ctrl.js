@@ -1,7 +1,5 @@
-angular.module("ContractsManagerApp")
-    .controller("ListCtrl", ["$scope", "$http", function($scope, $http) {
-
-
+  angular.module("ContractsManagerApp")
+      .controller("ListCtrl", ["$scope", "$http", "$uibModal", "$timeout", "$rootScope", function($scope, $http, $uibModal, $timeout, $rootScope) {
         function mesageError(e) {
             if (e == "Bad Request")
                 alert("Enter all the data required for the request. Bad Request, error 400.");
