@@ -35,9 +35,9 @@ angular.module("ContractsManagerApp")
                                 document.getElementById("inpResearcher" + (i + 1)).disabled = true;
                             }
                         }
-                        document.getElementById("updatedContract.keyWords").disabled = true;
-                        document.getElementById("btnEditKeyWords").disabled = false;
-                        document.getElementById("btnSaveKeyWords").disabled = true;
+                        document.getElementById("updatedContract.keywords").disabled = true;
+                        document.getElementById("btnEditkeywords").disabled = false;
+                        document.getElementById("btnSavekeywords").disabled = true;
                         document.getElementById("leaderGroup").disabled = true;
                     },
                     function(error) {
@@ -88,17 +88,17 @@ angular.module("ContractsManagerApp")
 
             }
 
-            $scope.saveKeyWords = function() {
-                $scope.updatedContract.keyWords = document.getElementById("updatedContract.keyWords").value;
-                document.getElementById("updatedContract.keyWords").disabled = true;
-                document.getElementById("btnEditKeyWords").disabled = false;
-                document.getElementById("btnSaveKeyWords").disabled = true;
+            $scope.savekeywords = function() {
+                $scope.updatedContract.keywords = document.getElementById("updatedContract.keywords").value;
+                document.getElementById("updatedContract.keywords").disabled = true;
+                document.getElementById("btnEditkeywords").disabled = false;
+                document.getElementById("btnSavekeywords").disabled = true;
 
             }
-            $scope.editKeyWords = function() {
-                document.getElementById("updatedContract.keyWords").disabled = false;
-                document.getElementById("btnEditKeyWords").disabled = true;
-                document.getElementById("btnSaveKeyWords").disabled = false;
+            $scope.editkeywords = function() {
+                document.getElementById("updatedContract.keywords").disabled = false;
+                document.getElementById("btnEditkeywords").disabled = true;
+                document.getElementById("btnSavekeywords").disabled = false;
             }
 
 

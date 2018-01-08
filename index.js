@@ -30,7 +30,7 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, database) => {
         process.exit(1);
     }
 
-    db = database.collection("contractsTest");
+    db = database.collection("newContracts");
     app.listen(port, () => {
         console.log("Magic is happening on port " + port);
     });

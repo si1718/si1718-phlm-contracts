@@ -33,7 +33,7 @@
                 finishDate: "",
                 funders: "",
                 researchers: "",
-                keyWords: ""
+                keywords: ""
             }
 
         }
@@ -47,7 +47,7 @@
                 document.getElementById("contract.finishDate").value == "" ||
                 document.getElementById("contract.funders").value == "" ||
                 document.getElementById("contract.researchers").value == "" ||
-                document.getElementById("contract.keyWords").value == "") {
+                document.getElementById("contract.keywords").value == "") {
                 alert("All data is required");
             }
 
@@ -99,8 +99,8 @@
             if ($scope.contract.researchers) {
                 searchURL = searchURL + "researchers=" + $scope.contract.researchers + "&";
             }
-            if ($scope.contract.keyWords) {
-                searchURL = searchURL + "keyWords=" + $scope.contract.keyWords + "&";
+            if ($scope.contract.keywords) {
+                searchURL = searchURL + "keywords=" + $scope.contract.keywords + "&";
             }
             if (searchURL.length > 0) {
                 searchURL = "?" + searchURL;
