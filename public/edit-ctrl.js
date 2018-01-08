@@ -4,6 +4,15 @@ angular.module("ContractsManagerApp")
             $scope.idContract = $routeParams.idContract;
             console.log("EditCtrl initialized for contract " + $scope.idContract);
             $http
+            /*
+                .get("/api/v1/contracts/recommendationContracts" + $scope.idContract)
+                .then(function(response) {
+                    $scope.recommendationContracts = response.data;
+                },     
+                function(error) {
+                        mesageError(error.data);
+                })
+            */    
                 .get("/api/v1/contracts/" + $scope.idContract)
                 .then(function(response) {
                         $scope.updatedContract = response.data;
@@ -21,9 +30,9 @@ angular.module("ContractsManagerApp")
                             document.getElementById("btnValidateLeader").disabled = false;
                             document.getElementById("btnEditLeader").disabled = true;
                         }
-                        for (var i = 0; i < $scope.updatedContract.researchers.length; i++) {
+                        for (var i = 0; i < $scope.updatedContract.researchers.length || i < 1; i++) {
                             document.getElementById("researcher" + (i + 1)).style.display = 'block';
-                            var researcher = JSON.stringify($scope.updatedContract.researchers[i], 2, null).replace(/"/g, "");
+                            var researcher = JSON.stringify($scope.updatedContract.researchers[i], 2, null);
                             document.getElementById("inpResearcher" + (i + 1)).value = researcher;
                             if ($scope.updatedContract.urlResearchers[i] == "") {
                                 document.getElementById("btnEditResearcher" + (i + 1)).disabled = true;
@@ -36,8 +45,8 @@ angular.module("ContractsManagerApp")
                             }
                         }
                         document.getElementById("updatedContract.keywords").disabled = true;
-                        document.getElementById("btnEditkeywords").disabled = false;
-                        document.getElementById("btnSavekeywords").disabled = true;
+                        document.getElementById("btnEditKeywords").disabled = false;
+                        document.getElementById("btnSaveKeywords").disabled = true;
                         document.getElementById("leaderGroup").disabled = true;
                     },
                     function(error) {

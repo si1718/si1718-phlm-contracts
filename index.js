@@ -23,6 +23,7 @@ app.use(bodyParser.json()); //use default json enconding/decoding
 app.use(helmet()); //improve security
 
 var db;
+var dbRC;
 
 MongoClient.connect(mdbURL, { native_parser: true }, (err, database) => {
     if (err) {
@@ -31,6 +32,7 @@ MongoClient.connect(mdbURL, { native_parser: true }, (err, database) => {
     }
 
     db = database.collection("newContracts");
+    dbRC = database.collection("recommendationContracts");
     app.listen(port, () => {
         console.log("Magic is happening on port " + port);
     });
@@ -103,6 +105,36 @@ app.get(BASE_API_PATH + "/contracts/:idContract", function(request, response) {
     else {
         console.log("INFO: New GET request to /Contracts/" + idContract);
         db.find({ "idContract": idContract }).toArray(function(err, filteredContracts) {
+            if (err) {
+                console.error('WARNING: Error getting data from DB');
+                response.sendStatus(500); // internal server error
+            }
+            else {
+                console.log("Name: " + filteredContracts.name);
+                if (filteredContracts.length > 0) {
+                    var contact = filteredContracts[0]; //since we expect to have exactly ONE contact with this name
+                    console.log("INFO: Sending contact: " + JSON.stringify(contact, 2, null));
+                    response.send(contact);
+                }
+                else {
+                    console.log("WARNING: There are not any contact with id " + idContract);
+                    response.sendStatus(404); // not found
+                }
+            }
+        });
+    }
+});
+
+// GET a list Recommendation Contracts to single resource
+app.get(BASE_API_PATH + "/contracts/recommendationContracts/:idContract", function(request, response) {
+    var idContract = request.params.idContract;
+    if (!idContract) {
+        console.log("WARNING: New GET request to /Contracts/:idContract without idContract, sending 400...");
+        response.sendStatus(400); // bad request
+    }
+    else {
+        console.log("INFO: New GET request to /Contracts/recommendationContracts" + idContract);
+        dbRC.find({ "contract": idContract }).toArray(function(err, filteredContracts) {
             if (err) {
                 console.error('WARNING: Error getting data from DB');
                 response.sendStatus(500); // internal server error

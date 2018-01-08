@@ -1,4 +1,4 @@
-<h2>Edit contract {{reference}}</h2>
+<h2>Edit contract > {{updatedContract.reference}}</h2>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -13,7 +13,7 @@
             <th> Keywords </th>
         </tr>
     </thead>
-    <tbody>
+    <tfoot>
         <tr>
             <td>{{updatedContract.reference}}</td>
             <td><input ng-model="updatedContract.nmContract" /></td>
@@ -91,13 +91,16 @@
                     </div>
                 </td>
                 <td> <input ng-model="updatedContract.keywords" id="updatedContract.keywords" />
-                    <button id='btnEditKeyWords' class='btn btn-primary' ng-click='editKeyWords()'>Edit</button>
-                    <button id='btnSaveKeyWords' class='btn btn-primary' ng-click='saveKeyWords()'>Save</button>
+                    <button id='btnEditKeywords' class='btn btn-primary' ng-click='editKeywords()'>Edit</button>
+                    <button id='btnSaveKeywords' class='btn btn-primary' ng-click='saveKeywords()'>Save</button>
                 </td>
         </tr>
         <tr>
             <button class="btn btn-primary" ng-click="updateContract()">Update</button>
             <button class="btn btn-primary" ng-click="cancelUpdate()">Cancel</button>
         </tr>
-    </tbody>
+    </tfoot>
 </table>
+ 
+    <h2> Related contracts: > {{recommendationContracts.recommendations}} </h2> 
+
