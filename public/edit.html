@@ -1,11 +1,13 @@
-<h2>Edit contract > {{updatedContract.reference}}</h2>
+<h2>Edit contract </h2>
 <table class="table table-condensed">
     <thead>
         <tr>
             <th> Reference </th>
             <th> Name </th>
             <th> Leader</th>
-            <th> <div style="display: none;" id="lblLeaderGroup"> Leader group </div> </th>
+            <th>
+                <div style="display: none;" id="lblLeaderGroup"> Leader group </div>
+            </th>
             <th> Start Date </th>
             <th> Finish Date </th>
             <th> Funders </th>
@@ -16,13 +18,13 @@
     <tfoot>
         <tr>
             <td>{{updatedContract.reference}}</td>
-            <td><input ng-model="updatedContract.nmContract" /></td>
+            <td><input ng-model="updatedContract.nmContract" id="inpNmContract" /></td>
             <td><input ng-model="updatedContract.leader" id="inpLeader" enable /> <br>
                 <button class="btn btn-primary" ng-click="validateLeader()" id="btnValidateLeader">Validate</button>
                 <button class="btn btn-primary" ng-click="editLeader()" id="btnEditLeader">Edit</button>
-                <td> 
-                    <div style="display: none;" id="infLeaderGroup"> 
-                        <input ng-model="leaderGroup" id="leaderGroup" /> 
+                <td>
+                    <div style="display: none;" id="infLeaderGroup">
+                        <input ng-model="leaderGroup" id="leaderGroup" />
                     </div>
                 </td>
                 <td> <input ng-model="updatedContract.startDate" /></td>
@@ -99,8 +101,9 @@
             <button class="btn btn-primary" ng-click="updateContract()">Update</button>
             <button class="btn btn-primary" ng-click="cancelUpdate()">Cancel</button>
         </tr>
+        <tr>
+            <h4> Related contracts: </h4>
+                <div id="relatedContracts"> </div>
+        </tr>
     </tfoot>
 </table>
- 
-    <h2> Related contracts: > {{recommendationContracts.recommendations}} </h2> 
-

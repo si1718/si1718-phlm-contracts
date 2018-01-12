@@ -1,6 +1,20 @@
-<div> <h3> Graphic 1: All contracts </h3> </div>
-<div id="container"></div>
-<div> <h3> Graphic 2: Contracts by group </h3> </div>
-<select id="cmbGroups"> </select>
-<button class="btn btn-primary" ng-click="showContractGroups()" id="btnShowContractGroups">Go!</button>
-<div id="container2"></div>
+<div>
+    <h3> Keyword statistics </h3>
+    <h4> Table 1: keywords on twitter per month</h4>
+    <div id="tableStatistics"> </div>
+
+    <h4> Graphic 1: keywords on twitter per day </h4>
+    Select keyword: <select id="cmbGroupsKw"> </select>     <button class="btn btn-primary" ng-click="showStatistictsKw()" id="showStatistictsKw">Go!</button>
+    <div id="container3"></div>
+</div>
+<div>
+    <h3> Contracts of the University of Seville </h3>
+    <h4> Graphic 2: All contracts </h4>
+    <button class="btn btn-primary" ng-click="showAllContract()" id="btnShowAllContract">Go!</button>
+    <div id="container"></div>
+
+    <h4> Graphic 3: Contracts by group </h4>
+    <select id="cmbGroups"> </select>
+    <button class="btn btn-primary" ng-click="showContractGroups()" id="btnShowContractGroups" disabled>Go!</button>
+    <div id="container2"></div>
+</div>

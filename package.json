@@ -1,7 +1,7 @@
 {
   "name": "si1718-phlm-contracts",
   "version": "1.0.0",
-    "engines": {
+  "engines": {
     "node": "6.11.2",
     "npm": "3.10.10"
   },
@@ -17,6 +17,7 @@
     "helmet": "^3.9.0",
     "jwt-simple": "^0.5.1",
     "mongodb": "^2.2.33",
+    "plotly": "^1.0.6",
     "rand-token": "^0.4.0"
   },
   "devDependencies": {},

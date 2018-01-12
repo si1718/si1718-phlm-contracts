@@ -4,18 +4,10 @@ angular.module("ContractsManagerApp")
             $scope.idContract = $routeParams.idContract;
             console.log("EditCtrl initialized for contract " + $scope.idContract);
             $http
-            /*
-                .get("/api/v1/contracts/recommendationContracts" + $scope.idContract)
-                .then(function(response) {
-                    $scope.recommendationContracts = response.data;
-                },     
-                function(error) {
-                        mesageError(error.data);
-                })
-            */    
                 .get("/api/v1/contracts/" + $scope.idContract)
                 .then(function(response) {
                         $scope.updatedContract = response.data;
+                        relatedcontracts(response.data.idContract.toLowerCase());
 
                         if ($scope.updatedContract.urlLeader != "") {
                             document.getElementById("inpLeader").disabled = true;
@@ -185,5 +177,18 @@ angular.module("ContractsManagerApp")
                     alert("A contract with this reference already exists. Conflict, error 409.");
             }
 
+            function relatedcontracts(name) {
+                $http
+                    .get("/api/v1/rc/" + name)
+                    .then(function(response) {
+                        $scope.data = response.data;
+                        for (var j = 0; j < $scope.data.recommendations.length; j++) {
+                            var a = document.createElement('a');
+                            a.href = '#!/contracts/'+ $scope.data.recommendations[j]; // Insted of calling setAttribute 
+                            a.innerHTML = $scope.data.recommendations[j] + "   " // <a>INNER_TEXT</a>
+                            document.getElementById("relatedContracts").appendChild(a); // Append the link to the div
+                        }
+                    });
+            }
         }
     ]);

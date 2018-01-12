@@ -24,15 +24,18 @@ app.use(helmet()); //improve security
 
 var db;
 var dbRC;
+var dbKw;
+var dbSt;
 
 MongoClient.connect(mdbURL, { native_parser: true }, (err, database) => {
     if (err) {
         console.log("CAN NOT CONNECT TO DB: " + err);
         process.exit(1);
     }
-
     db = database.collection("newContracts");
     dbRC = database.collection("recommendationContracts");
+    dbKw = database.collection("contractsKeywords");
+    dbSt = database.collection("twitterKeywordsStatistics");
     app.listen(port, () => {
         console.log("Magic is happening on port " + port);
     });
@@ -77,13 +80,13 @@ app.get(BASE_API_PATH + "/contracts", function(request, response) {
 
     if (request.query.researchers)
         query["researchers"] = request.query.researchers;
-        
+
     if (request.query.keyWords)
         query["keyWords"] = request.query.keyWords;
 
 
 
-    db.find(query).toArray(function(err, contracts) {
+    db.find(query).limit(600).toArray(function(err, contracts) {
         if (err) {
             console.error('WARNING: Error getting data from DB');
             response.sendStatus(500); // internal server error
@@ -125,34 +128,71 @@ app.get(BASE_API_PATH + "/contracts/:idContract", function(request, response) {
     }
 });
 
-// GET a list Recommendation Contracts to single resource
-app.get(BASE_API_PATH + "/contracts/recommendationContracts/:idContract", function(request, response) {
+
+// GET relatedcontracts a single resource
+app.get(BASE_API_PATH + "/rc/:idContract", function(request, response) {
     var idContract = request.params.idContract;
     if (!idContract) {
         console.log("WARNING: New GET request to /Contracts/:idContract without idContract, sending 400...");
         response.sendStatus(400); // bad request
     }
     else {
-        console.log("INFO: New GET request to /Contracts/recommendationContracts" + idContract);
+        console.log("INFO: New GET request to /Contracts/" + idContract);
+
         dbRC.find({ "contract": idContract }).toArray(function(err, filteredContracts) {
             if (err) {
                 console.error('WARNING: Error getting data from DB');
                 response.sendStatus(500); // internal server error
             }
             else {
-                console.log("Name: " + filteredContracts.name);
+                console.log("Name: " + idContract);
                 if (filteredContracts.length > 0) {
-                    var contact = filteredContracts[0]; //since we expect to have exactly ONE contact with this name
-                    console.log("INFO: Sending contact: " + JSON.stringify(contact, 2, null));
-                    response.send(contact);
+                    response.send(filteredContracts[0]);
                 }
                 else {
-                    console.log("WARNING: There are not any contact with id " + idContract);
-                    response.sendStatus(404); // not found
+                    console.log("Does not exist recommendationContracts");
                 }
             }
         });
     }
+});
+
+
+// GET keywrds a single resource
+app.get(BASE_API_PATH + "/keywords", function(request, response) {
+    dbKw.find({}).toArray(function(err, filteredKw) {
+        if (err) {
+            console.error('WARNING: Error getting data from DB');
+            response.sendStatus(500); // internal server error
+        }
+        else {
+            if (filteredKw.length > 0) {
+                response.send(filteredKw);
+            }
+            else {
+                console.log("Does not exist keyword");
+            }
+        }
+    });
+});
+
+
+// GET statistics a single resource
+app.get(BASE_API_PATH + "/statistics", function(request, response) {
+    dbSt.find({ }).toArray(function(err, filteredSt) {
+        if (err) {
+            console.error('WARNING: Error getting data from DB');
+            response.sendStatus(500); // internal server error
+        }
+        else {
+            if (filteredSt.length > 0) {
+                response.send(filteredSt);
+            }
+            else {
+                console.log("Does not exist recommendationContracts");
+            }
+        }
+    });
 });
 
 
