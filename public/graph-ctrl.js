@@ -117,6 +117,8 @@ angular.module("ContractsManagerApp")
                             }
                         }]
                     });
+
+
                 });
 
         }
@@ -124,10 +126,11 @@ angular.module("ContractsManagerApp")
         $scope.showStatistictsKw = function() {
             var keyword = document.getElementById("cmbGroupsKw").value;
             var lsFreqDay = [];
-            for (var i = 0; i < kwStatistics.length; i++)
-                if (kwStatistics[i].key.indexOf(keyword) > 10)
+            for (var i = 0; i < kwStatistics.length; i++) {
+                if (kwStatistics[i].key.indexOf(keyword) > 10) {
                     lsFreqDay.push(kwStatistics[i]);
-
+                }
+            }
             lsFreqDay.sort(function(a, b) { return a.frequency - b.frequency });
 
             Highcharts.chart('container3', {
@@ -154,19 +157,20 @@ angular.module("ContractsManagerApp")
                     enabled: false
                 },
                 series: [{
-                    name: 'Keyword: ' + keyword ,
+                    name: 'Contracts University of Seville',
                     data: [
-                        [lsFreqDay[0].key, lsFreqDay[0].frequency],
-                        [lsFreqDay[1].key, lsFreqDay[1].frequency],
-                        [lsFreqDay[2].key, lsFreqDay[2].frequency],
-                        [lsFreqDay[3].key, lsFreqDay[3].frequency],
-                        [lsFreqDay[4].key, lsFreqDay[4].frequency],
-                        [lsFreqDay[5].key, lsFreqDay[5].frequency],
-                        [lsFreqDay[6].key, lsFreqDay[6].frequency],
-                        [lsFreqDay[7].key, lsFreqDay[7].frequency],
-                        [lsFreqDay[8].key, lsFreqDay[8].frequency],
-                        [lsFreqDay[9].key, lsFreqDay[9].frequency],
-                        [lsFreqDay[10].key, lsFreqDay[10].frequency],
+                        [lsFreqDay[0].key,  parseInt(lsFreqDay[0].frequency)],
+                        [lsFreqDay[1].key,  parseInt(lsFreqDay[1].frequency)],
+                        [lsFreqDay[2].key,  parseInt(lsFreqDay[2].frequency)],
+                        [lsFreqDay[3].key,  parseInt(lsFreqDay[3].frequency)],
+                        [lsFreqDay[4].key,  parseInt(lsFreqDay[4].frequency)],
+                        [lsFreqDay[5].key,  parseInt(lsFreqDay[5].frequency)],
+                        [lsFreqDay[6].key,  parseInt(lsFreqDay[6].frequency)],
+                        [lsFreqDay[7].key,  parseInt(lsFreqDay[7].frequency)],
+                        [lsFreqDay[8].key,  parseInt(lsFreqDay[8].frequency)],
+                        [lsFreqDay[9].key,  parseInt(lsFreqDay[9].frequency)],
+                        [lsFreqDay[10].key, parseInt(lsFreqDay[10].frequency)],
+                        [lsFreqDay[11].key, parseInt(lsFreqDay[11].frequency)]
                     ],
                     dataLabels: {
                         enabled: true,
@@ -182,6 +186,7 @@ angular.module("ContractsManagerApp")
                     }
                 }]
             });
+
         }
 
         $scope.showContractGroups = function() {
